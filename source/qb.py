@@ -6,14 +6,17 @@ CHAPTERS = {
     1: {"title": "Introduction", "deck": "introduction.pptx", "slides": 16},
     2: {"title": "Project Management", "deck": "project management.pptx", "slides": 33},
     3: {"title": "Quality Management", "deck": "quality mangment.pptx", "slides": 32},
-    4: {"title": "Source Code Quality", "deck": "Source code Quality.pptx", "slides": 36},
-    5: {"title": "Object-Oriented Analysis & Design", "deck": "object-Oriented sowfware analysis and design.pptx", "slides": 27},
-    6: {"title": "Security Engineering", "deck": "security engineering.pptx", "slides": 44},
-    7: {"title": "Dependability & Reliability", "deck": "Dependability and reliability.pptx", "slides": 33},
+    4: {"title": "Object-Oriented Analysis & Design", "deck": "object-Oriented sowfware analysis and design.pptx", "slides": 27},
+    5: {"title": "Source Code Quality", "deck": "Source code Quality.pptx", "slides": 36},
+    6: {"title": "Dependability & Reliability", "deck": "Dependability and reliability.pptx", "slides": 33},
+    7: {"title": "Security Engineering", "deck": "security engineering.pptx", "slides": 44},
     8: {"title": "Software Testing", "deck": None},
     9: {"title": "Software Evolution & Configuration Management", "deck": None},
     10: {"title": "Other Topics (Formal Verification, TDD, Patterns)", "deck": None},
 }
+
+# data_*.py files were written before the course order was corrected; map their numbers to CHAPTERS.
+RENUMBER = {4: 5, 5: 4, 6: 7, 7: 6}
 
 SOURCES = {}
 
@@ -24,6 +27,7 @@ def src(id, label, file):
 
 def _add(d):
     assert d["id"] not in BY_ID, "duplicate id " + d["id"]
+    d["ch"] = RENUMBER.get(d["ch"], d["ch"])
     assert d["ch"] in CHAPTERS, d
     Q.append(d)
     BY_ID[d["id"]] = d
