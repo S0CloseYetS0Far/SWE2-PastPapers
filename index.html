@@ -276,6 +276,74 @@ table.mini th { background: var(--paper); font-weight: 600; }
   .btn { padding: .5rem .8rem; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* ---------- print a chapter as a paper exam ---------- */
+.chwrap { position: relative; display: grid; }
+.chwrap .ch { padding-right: 4.6rem; }
+.chwrap .prt { position: absolute; top: .65rem; right: .65rem; padding: .2rem .6rem; font-size: .78rem; background: var(--sheet); }
+#printSheet { display: none; }
+
+@page {
+  size: A4; margin: 15mm 16mm 17mm;
+  @bottom-left { content: "CS392 Software Engineering 2"; font: 8.5pt "Times New Roman", Times, serif; }
+  @bottom-right { content: "Page " counter(page) " of " counter(pages); font: 8.5pt "Times New Roman", Times, serif; }
+}
+@media print {
+  html, body.printing { background: #fff !important; color: #000 !important; min-height: 0 !important; height: auto !important; margin: 0 !important; padding: 0 !important; }
+  body.printing > *:not(#printSheet) { display: none !important; }
+  body.printing #printSheet { display: block; }
+}
+#printSheet {
+  font: 11pt/1.35 "Times New Roman", Times, serif; color: #000; background: #fff; text-align: left;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+#printSheet * { color: #000 !important; background: transparent !important; box-shadow: none !important; }
+#printSheet b, #printSheet strong { font-weight: 700; }
+#printSheet h2, #printSheet h3 { font-family: inherit; letter-spacing: 0; }
+#printSheet code, #printSheet pre { font: 9.5pt/1.3 "Courier New", Courier, monospace; border: 0; border-radius: 0; padding: 0; }
+#printSheet pre { white-space: pre-wrap; margin: .3em 0; padding: 0; border: 0; }
+#printSheet ol, #printSheet ul { margin: .2em 0; padding-left: 1.4em; }
+#printSheet table.mini { border-collapse: collapse; margin: .35em 0; font: 400 10pt/1.3 "Times New Roman", Times, serif; }
+#printSheet table.mini th, #printSheet table.mini td { border: 1px solid #000; padding: 2px 6px; text-align: left; vertical-align: top; }
+#printSheet table.mini th { font-weight: 700; }
+#printSheet img { max-width: 100%; max-height: 120mm; filter: grayscale(1); display: block; margin: .3em 0; }
+.ex-head { padding-bottom: 1mm; }
+.ex-course { font-size: 15pt; font-weight: 700; }
+.ex-chap { font-size: 12pt; margin-top: 1mm; }
+.ex-fields { display: flex; flex-wrap: wrap; gap: 3mm 7mm; margin-top: 5mm; font-weight: 700; font-size: 10.5pt; }
+.ex-fields span i { display: inline-block; width: 50mm; border-bottom: 1px solid #000; margin-left: 2mm; }
+.ex-fields span.short i { width: 26mm; }
+.ex-info { margin-top: 4mm; font-size: 10pt; }
+.ex-sec { display: flex; align-items: baseline; gap: 4mm; border-top: 1pt solid #000; border-bottom: 1pt solid #000; padding: 1.2mm 0; margin: 6mm 0 2.5mm; font-size: 11pt; }
+.ex-sec b { font-size: 12pt; }
+.ex-sec .ex-score { margin-left: auto; font-weight: 700; }
+.ex-instr { font-weight: 700; margin: 0 0 3mm; }
+.ex-q { break-inside: avoid; page-break-inside: avoid; margin: 0 0 4.5mm; }
+.ex-stem { display: grid; grid-template-columns: 7.5mm 1fr; font-weight: 700; }
+.ex-stem .ex-body > :first-child { margin-top: 0; }
+.ex-stem .ex-body table, .ex-stem .ex-body pre, .ex-stem .ex-body ol, .ex-stem .ex-body ul { font-weight: 400; }
+.ex-opts { list-style: none; margin: 1mm 0 0 7.5mm !important; padding: 0 !important; }
+.ex-opts li { display: grid; grid-template-columns: 4.5mm 6mm 1fr; align-items: baseline; margin: .6mm 0; }
+.ex-opts .bub { width: 3.2mm; height: 3.2mm; border: 1px solid #000; border-radius: 50%; display: inline-block; transform: translateY(.4mm); }
+.ex-tf { display: grid; grid-template-columns: 8mm 1fr 24mm; border: 1px solid #000; margin-top: -1px; break-inside: avoid; page-break-inside: avoid; }
+.ex-tf > div { padding: 1.5mm 2mm; }
+.ex-tf > div + div { border-left: 1px solid #000; }
+.ex-tf.th { font-weight: 700; }
+.ex-tf.th > div { padding: 1mm 2mm; }
+.ex-tfwrap { margin-bottom: 4mm; }
+.ex-box { border: 1px solid #000; margin: 2mm 0 0 7.5mm; }
+.ex-key { break-before: page; page-break-before: always; font-size: 9.5pt; line-height: 1.3; }
+.ex-key h2 { font-size: 14pt; margin: 0 0 1mm; }
+.ex-key .sub { margin: 0 0 4mm; }
+.ex-key h3 { font-size: 10.5pt; margin: 4mm 0 1.5mm; }
+.key-grid { display: grid; grid-template-columns: repeat(10, 1fr); padding: 1px 0 0 1px; }
+.key-grid div { border: 1px solid #000; margin: -1px 0 0 -1px; padding: .8mm 1.5mm; white-space: nowrap; }
+.key-grid b { display: inline-block; min-width: 6mm; font-weight: 400; }
+.key-grid div span { font-weight: 700; }
+.key-w { column-count: 2; column-gap: 7mm; }
+.key-w > div { break-inside: avoid; page-break-inside: avoid; display: grid; grid-template-columns: 7mm 1fr; margin-bottom: 2.5mm; }
+.key-w .ref { display: block; font-style: italic; font-size: 8.5pt; margin-top: .5mm; }
+#printSheet .key-w table.mini { font-size: 8.5pt; }
 </style>
 </head>
 <body>
@@ -298,6 +366,7 @@ table.mini th { background: var(--paper); font-weight: 600; }
   </div>
 </nav>
 <div class="toast" id="toast" hidden></div>
+<div id="printSheet" aria-hidden="true"></div>
 
 <script src="questions.js"></script>
 <script>
@@ -461,6 +530,9 @@ table.mini th { background: var(--paper); font-weight: 600; }
         var v = b.getAttribute("data-ch"); start(v === "all" ? "all" : +v);
       });
     });
+    app.querySelectorAll("[data-print]").forEach(function (b) {
+      b.addEventListener("click", function () { printChapter(+b.getAttribute("data-print")); });
+    });
   }
   function chapterCard(n) {
     var list = poolFor(n);
@@ -474,11 +546,102 @@ table.mini th { background: var(--paper); font-weight: 600; }
       num = n; title = c.title;
       meta = list.length + " question" + (list.length === 1 ? "" : "s") + (c.deck ? " · " + c.slides + " slides" : " · no slides");
     }
-    return '<button type="button" class="ch' + (n === "all" ? " all" : "") + '" data-ch="' + n + '"' + (list.length ? "" : " disabled") + '>' +
+    var card = '<button type="button" class="ch' + (n === "all" ? " all" : "") + '" data-ch="' + n + '"' + (list.length ? "" : " disabled") + '>' +
       '<span class="num">' + num + '</span><span class="t">' + esc(title) + '</span>' +
       '<span class="meta">' + esc(meta) + (st.done ? " · " + st.done + " done" : "") + '</span>' +
       '<span class="bar" aria-hidden="true"><span style="width:' + pct + '%"></span></span></button>';
+    if (n === "all") return card;
+    return '<div class="chwrap">' + card + '<button type="button" class="chip prt" data-print="' + n + '" title="Print chapter ' + n + ' as a paper exam with an answer key">Print</button></div>';
   }
+
+  // ---------- print a chapter as a paper exam ----------
+  function plain(html) { return String(html).replace(/<[^>]+>/g, " ").replace(/&[a-z#0-9]+;/gi, "x").replace(/\s+/g, " ").trim(); }
+  // answer box height follows the length of the model answer (lines of writing at ~8 mm each)
+  function boxHeight(q) {
+    var lines = Math.ceil(plain(q.a).length / 70) + 2;
+    if (/<table/.test(q.a)) lines += 4;
+    if (/<(ol|ul|br)/.test(q.a)) lines += 1;
+    return Math.max(28, Math.min(110, lines * 8));
+  }
+  function stem(num, q) {
+    return '<div class="ex-stem"><span>' + num + '.</span><div class="ex-body">' + q.q +
+      (q.img ? '<img src="img/' + esc(q.img) + '" alt="">' : '') + '</div></div>';
+  }
+  function slideRef(q) {
+    var c = D.chapters[q.ch], s = String(q.sl || "");
+    return c.deck && s ? "Ch " + q.ch + ", " + (/^\d+$/.test(s) ? "slide " : "slides ") + s : (c.deck ? "Ch " + q.ch : "Textbook");
+  }
+  function buildPrint(n) {
+    var c = D.chapters[n], qs = byCh[n] || [];
+    var mc = qs.filter(function (q) { return q.t === "mcq"; }),
+      tf = qs.filter(function (q) { return q.t === "tf"; }),
+      wr = qs.filter(function (q) { return q.t === "short"; });
+    var num = 0, part = 0, key = { mc: [], tf: [], wr: [] };
+    function section(title, count, instr) {
+      part++;
+      return '<div class="ex-sec"><b>Question ' + part + ':</b><span>' + title + ' (CHAPTER ' + n + ')</span>' +
+        '<span class="ex-score">[ &nbsp; &nbsp; &nbsp; / ' + count + ' ]</span></div>' + (instr ? '<p class="ex-instr">' + instr + '</p>' : '');
+    }
+    var h = '<header class="ex-head"><div class="ex-course">CS392 — Software Engineering 2</div>' +
+      '<div class="ex-chap">Chapter ' + n + ': ' + esc(c.title) + ' — practice paper from past exams</div>' +
+      '<div class="ex-fields"><span>Student Name (in English):<i></i></span><span class="short">Student ID:<i></i></span><span class="short">Date:<i></i></span></div>' +
+      '<div class="ex-info">' + qs.length + ' questions: ' + [mc.length && mc.length + " multiple choice", tf.length && tf.length + " true/false", wr.length && wr.length + " written"].filter(Boolean).join(", ") +
+      '. Answer all questions. The answer key is on the last page' + (wr.length ? 's' : '') + '.</div></header>';
+
+    if (mc.length) {
+      mc.forEach(function (q, i) {
+        num++; key.mc.push([num, String.fromCharCode(65 + q.a)]);
+        h += '<div class="ex-q">' + (i ? '' : section("Multiple Choices", mc.length, "Choose the correct answer and fill in its circle.")) + stem(num, q) +
+          '<ul class="ex-opts">' + q.o.map(function (o, j) {
+            return '<li><span class="bub"></span><span>' + String.fromCharCode(65 + j) + ')</span><span>' + o + '</span></li>';
+          }).join("") + '</ul></div>';
+      });
+    }
+    if (tf.length) {
+      h += '<div class="ex-tfwrap">';
+      tf.forEach(function (q, i) {
+        num++; key.tf.push([num, q.a === 0 ? "T" : "F"]);
+        var row = '<div class="ex-tf"><div>' + num + '</div><div>' + q.q + (q.img ? '<img src="img/' + esc(q.img) + '" alt="">' : '') + '</div><div></div></div>';
+        if (!i) row = '<div class="ex-q" style="margin:0">' + section("Answer with True or False", tf.length, "Answer the following questions by filling the table with TRUE or FALSE.") +
+          '<div class="ex-tf th"><div>No</div><div>Statement</div><div>True / False</div></div>' + row + '</div>';
+        h += row;
+      });
+      h += '</div>';
+    }
+    if (wr.length) {
+      wr.forEach(function (q, i) {
+        num++; key.wr.push([num, q]);
+        h += '<div class="ex-q">' + (i ? '' : section("Written Questions", wr.length, "Answer in the box under each question.")) + stem(num, q) +
+          '<div class="ex-box" style="height:' + boxHeight(q) + 'mm"></div></div>';
+      });
+    }
+
+    function grid(list) { return '<div class="key-grid">' + list.map(function (k) { return '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div>'; }).join("") + '</div>'; }
+    h += '<section class="ex-key"><h2>Answer Key</h2><p class="sub">Chapter ' + n + ': ' + esc(c.title) + '. Slide numbers refer to slides/' + esc(c.deck || "—") + '.</p>';
+    function range(list) { return list.length === 1 ? "question " + list[0][0] : "questions " + list[0][0] + "–" + list[list.length - 1][0]; }
+    if (key.mc.length) h += '<h3>Multiple choice (' + range(key.mc) + ')</h3>' + grid(key.mc);
+    if (key.tf.length) h += '<h3>True / False (' + range(key.tf) + ')</h3>' + grid(key.tf);
+    if (key.wr.length) h += '<h3>Written answers (' + range(key.wr) + ')</h3><div class="key-w">' +
+      key.wr.map(function (k) { return '<div><b>' + k[0] + '.</b><div>' + k[1].a + '<span class="ref">' + esc(slideRef(k[1])) + '</span></div></div>'; }).join("") + '</div>';
+    h += '</section>';
+
+    document.getElementById("printSheet").innerHTML = h;
+    document.body.classList.add("printing");
+    document.title = "CS392 Chapter " + n + " - " + c.title;
+  }
+  function printChapter(n) {
+    buildPrint(n);
+    // give the figures a moment to load so they appear on paper
+    var imgs = [].slice.call(document.querySelectorAll("#printSheet img"));
+    Promise.all(imgs.map(function (im) { return im.complete ? 0 : new Promise(function (r) { im.onload = im.onerror = r; }); }))
+      .then(function () { window.print(); });
+  }
+  window.addEventListener("afterprint", function () {
+    document.body.classList.remove("printing");
+    document.getElementById("printSheet").innerHTML = "";
+    document.title = PAGE_TITLE;
+  });
+  var PAGE_TITLE = document.title;
 
   // ---------- question ----------
   function optionsOf(q) { return q.t === "tf" ? ["True", "False"] : q.o; }
@@ -691,6 +854,9 @@ table.mini th { background: var(--paper); font-weight: 600; }
   });
 
   render();
+  // index.html#print=4 prepares chapter 4's paper so it can be printed or saved as PDF directly
+  var pm = /^#print=(\d+)$/.exec(location.hash);
+  if (pm && byCh[+pm[1]]) buildPrint(+pm[1]);
 })();
 </script>
 </body>
